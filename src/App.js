@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Bootstrap, Grid, Row, Col} from 'react-bootstrap';
+import { Grid, Row, Col } from 'react-bootstrap';
 import './App.css';
 
 class App extends Component {
@@ -30,8 +30,8 @@ class BasicLayout extends Component {
     return (
      <Grid>
       <Row>
-        <Col xs={6} md={4}>Menu here</Col>
-        <Col xs={12} md={8}>Body here</Col>
+        <Col xs={12} sm={4} md={2} lg={2} >Menu here</Col>
+        <Col xs={12} sm={8} md={10} lg={10}>Body here</Col>
       </Row>
     </Grid> 
     );
