@@ -30,6 +30,11 @@ class BasicLayout extends Component {
     return (
      <Grid>
       <Row>
+          <Col>
+            {/* Add the search-box component */}
+          </Col>
+      </Row>
+      <Row>
         <Col xs={12} sm={4} md={2} lg={2} >Menu here</Col>
         <Col xs={12} sm={8} md={10} lg={10}>Body here</Col>
       </Row>
