@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
+import SearchBox from './search-box'
 import './App.css';
 
 class App extends Component {
@@ -31,7 +32,7 @@ class BasicLayout extends Component {
      <Grid>
       <Row>
           <Col>
-            {/* Add the search-box component */}
+            <SearchBox /> {/* SearchBox will need a prop to get current book */}
           </Col>
       </Row>
       <Row>
