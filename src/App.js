@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
-import SearchBox from './search-box'
+import SearchBox from './searchBox'
 import './App.css';
 
 class App extends Component {
@@ -29,8 +29,6 @@ class BasicHeader extends Component {
 class BasicLayout extends Component {
   constructor (props) {
     super(props);
-
-    var parseXml = require('xml2js').parseString;
 
     //this.state = {xmlUrl: "", xmlObject: ""}; TODO: figure out state later
   }
