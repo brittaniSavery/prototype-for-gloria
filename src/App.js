@@ -29,22 +29,13 @@ class BasicHeader extends Component {
 class BasicLayout extends Component {
   constructor (props) {
     super(props);
-    this.state = {xmlUrl: "", xmlObject: ""}; /* url for the xml */
+
+    var parseXml = require('xml2js').parseString;
+
+    //this.state = {xmlUrl: "", xmlObject: ""}; TODO: figure out state later
   }
 
   render() {
-
-    /* parsing the xml */
-    var parseString = require('xml2js').parseString;
-    var https = require('https');
-
-    https.get('https://www.gpo.gov/fdsys/pkg/CFR-2012-title12-vol8/xml/CFR-2012-title12-vol8-part1002.xml', function(result){
-    });
-    
-    parseString("", function (err, result) {
-      console.dir(JSON.stringify(result));
-      this.setState({xmlObject: result});
-    });
 
     return (
      <Grid>
