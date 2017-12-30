@@ -8,25 +8,24 @@ router.get('/', function(req, res) {
   res.json([{
     id: 'part1002',
     name: 'EQUAL CREDIT OPPORTUNITY ACT (REGULATION B)'
-  }]); //TODO: Add result of xml2js
+  }]);
 });
 
+/* GET regulation as json object */
 router.get('/:id', function(req, res) {
 
-  res.json(req.params);
-
+  //Building filename from params
+  var filename = req.params.id + ".xml";
+  console.log(filename);
+  
   //reading xml from file
-  /*fs.readFile(filename, (readErr,data) => {
+  fs.readFile('./xml_regulations/' + filename, function(readErr,data) {
     if(readErr) throw readErr;
 
-    //parsing the xml read from file
-    xmlParser(data, (xmlErr, result) => {
-      if(xmlErr) throw xmlErr;
-
-      console.log(result);
-      console.log('Done!');
+    xmlParser(data, function(parseErr,result) {
+      res.json(result);
     });
-  });*/
+  });
 });
 
 module.exports = router;
