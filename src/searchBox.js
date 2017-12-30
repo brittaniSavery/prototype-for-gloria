@@ -12,7 +12,7 @@ class SearchBox extends Component {
         <form>
             <FormGroup controlId="formControlsSelect">
               <FormControl componentClass="select" placeholder="Select a book" /*onChange="handleChange"*/>
-                <option value="https://www.gpo.gov/fdsys/pkg/CFR-2012-title12-vol8/xml/CFR-2012-title12-vol8-part1002.xml">PART 1002 - EQUAL CREDIT OPPORTUNITY ACT (REGULATION B)</option>
+                <option value="part1002">PART 1002 - EQUAL CREDIT OPPORTUNITY ACT (REGULATION B)</option>
               </FormControl>
             </FormGroup>
         </form>
