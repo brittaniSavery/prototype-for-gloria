@@ -2,17 +2,28 @@ import React, { Component } from 'react';
 import { FormGroup, FormControl } from 'react-bootstrap';
 
 class SearchBox extends Component {
-    /* handleChange() {
-        // TODO: insert onChange functionality here
-        search box option will be 
-    } */
+    constructor() {
+        super();
+        this.state = {
+            regulations: []
+        };
+    }
+
+    componentDidMount() {
+        fetch('/regulations')
+        .then(res => res.json())
+        .then(regulations => this.setState({regulations}));
+    }
 
     render() {
         return (
         <form>
             <FormGroup controlId="formControlsSelect">
               <FormControl componentClass="select" placeholder="Select a book" /*onChange="handleChange"*/>
-                <option value="part1002">PART 1002 - EQUAL CREDIT OPPORTUNITY ACT (REGULATION B)</option>
+              <option key="blank" value="">Please select a regulation</option>
+              {this.state.regulations.map(regulation => 
+                <option key={regulation.id} value={regulation.id}>{regulation.name}</option>
+                )}
               </FormControl>
             </FormGroup>
         </form>
