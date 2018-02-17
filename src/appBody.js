@@ -7,7 +7,9 @@ class Body extends Component {
         super();
         this.state = {
             regulations: [],
-            current: '',
+            currentReg: '',
+            currentSections: [],
+            selectedSection: '' 
         };
     }
 
@@ -18,10 +20,22 @@ class Body extends Component {
     }
 
     handleCurrentRegulationChange(regulation) {
-      this.setState({current: regulation});
+        //changing the current regulation, and emptying the selected section
+        this.setState({current: regulation, selectedSection: ''});
+        
+        //getting the regulation object and parsing out the sections
+        fetch('/regulations/'+regulation)
+        .then(res => res.json())
+        .then(function(reg) {
+            //TODO parse sections: building section (backend?)
+
+      });
     }
 
-  
+    handleCurrentSelectionChange() {
+      //TODO
+    }
+
     render() {
   
       return (
@@ -35,8 +49,10 @@ class Body extends Component {
             </Col>
         </Row>
         <Row>
-          <Col xs={12} sm={4} md={2} lg={2} >Menu here</Col>
-          <Col xs={12} sm={8} md={10} lg={10}>Body here</Col>
+          <Col xs={12} sm={4} md={2} lg={2} >
+            <Menu sections={this.state.currentSections} />
+            </Col>
+          <Col xs={12} sm={8} md={10} lg={10}>{/*TODO create content section*/}</Col>
         </Row>
       </Grid> 
       );
