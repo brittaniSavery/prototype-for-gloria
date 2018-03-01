@@ -13,19 +13,37 @@ router.get('/', function(req, res) {
 
 /* GET regulation as json object */
 router.get('/:id', function(req, res) {
+  parseFile(req,res,0);
+});
 
-  //Building filename from params
-  var filename = req.params.id + ".xml";
-  console.log(filename);
-  
-  //reading xml from file
-  fs.readFile('./xml_regulations/' + filename, function(readErr,data) {
-    if(readErr) throw readErr;
 
-    xmlParser(data, function(parseErr,result) {
-      res.json(result);
+/* GET regulation sections (headers/titles) as json array */
+router.get('/:id/sections', function(req, res) {
+  parseFile(req,res,1);
+});
+
+var parseFile = function parseFile(req, res, findSections) {
+
+    //Building filename from params
+    var filename = req.params.id + ".xml";
+    console.log(filename);
+    
+    //reading xml from file
+    fs.readFile('./xml_regulations/' + filename, function(readErr,data) {
+      if(readErr) throw readErr;
+      
+      xmlParser(data, function(parseErr,result) {
+        if(findSections)
+        {
+          res.json(result.CFRGRANULE.PART.CONTENTS);
+        }
+        else
+        {
+          res.json(result);
+        }
     });
   });
-});
+}
+
 
 module.exports = router;
