@@ -35,7 +35,15 @@ var parseFile = function parseFile(req, res, findSections) {
       xmlParser(data, function(parseErr,result) {
         if(findSections)
         {
-          res.json(result.CFRGRANULE.PART.CONTENTS);
+          var sections = {};
+          var sectno = result.CFRGRANULE.PART[0].CONTENTS[0].SECTNO;
+          var secnames = result.CFRGRANULE.PART[0].CONTENTS[0].SUBJECT;
+          for(i = 0; i < sectno.length; i++)
+          { 
+            sections[sectno[i]] = sectno[i] + " " + secnames[i];
+          }
+          
+          res.json(sections);
         }
         else
         {
