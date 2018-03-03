@@ -33,6 +33,7 @@ var parseFile = function parseFile(req, res, findSections) {
       if(readErr) throw readErr;
       
       xmlParser(data, function(parseErr,result) {
+        //Find section titles
         if(findSections)
         {
           var sections = {};
@@ -45,6 +46,7 @@ var parseFile = function parseFile(req, res, findSections) {
           
           res.json(sections);
         }
+        //Parse entire xml file
         else
         {
           res.json(result);
