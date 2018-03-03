@@ -22,34 +22,48 @@ router.get('/:id/sections', function(req, res) {
   parseFile(req,res,1);
 });
 
-var parseFile = function parseFile(req, res, findSections) {
+/* GET body of sections */
+router.get('/:id/section/:secid', function(req, res) {
+  parseFile(req,res,2);
+});
+
+function parseFile(req, res, selectedPart) {
 
     //Building filename from params
     var filename = req.params.id + ".xml";
-    console.log(filename);
     
     //reading xml from file
     fs.readFile('./xml_regulations/' + filename, function(readErr,data) {
-      if(readErr) throw readErr;
+      if(readErr) return console.error('An error occurred: ', readErr);
       
+      //parse the xml to json
       xmlParser(data, function(parseErr,result) {
-        //Find section titles
-        if(findSections)
+        if(parseErr) return console.error('An error occurred: ', parseErr);
+
+        switch(selectedPart)
         {
-          var sections = {};
-          var sectno = result.CFRGRANULE.PART[0].CONTENTS[0].SECTNO;
-          var secnames = result.CFRGRANULE.PART[0].CONTENTS[0].SUBJECT;
-          for(i = 0; i < sectno.length; i++)
-          { 
-            sections[sectno[i]] = sectno[i] + " " + secnames[i];
-          }
-          
-          res.json(sections);
-        }
-        //Parse entire xml file
-        else
-        {
-          res.json(result);
+          //Find section titles
+          case 1:
+            var sections = {};
+            var sectno = result.CFRGRANULE.PART[0].CONTENTS[0].SECTNO;
+            var secnames = result.CFRGRANULE.PART[0].CONTENTS[0].SUBJECT;
+            for(i = 0; i < sectno.length; i++)
+            { 
+              sections[sectno[i]] = sectno[i] + " " + secnames[i];
+            }
+            
+            res.json(sections);
+          break;
+
+          //Find body of regulation sections
+          case 2:
+            var selectedSection = req.params.secid;
+            console.log('Section id: '+selectedSection);
+          break;
+
+          //Parse entire xml file
+          default:
+            res.json(result);
         }
     });
   });
