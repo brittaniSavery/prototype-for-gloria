@@ -51,6 +51,13 @@ function parseFile(req, res, selectedPart) {
             { 
               sections[sectno[i]] = sectno[i] + " " + secnames[i];
             }
+
+            //adding appendix sections
+            var apps = result.CFRGRANULE.PART[0].CONTENTS[0].APP;
+            for(i = 0; i < apps.length; i++)
+            {
+              sections['App'+i] = apps[i];
+            }
             
             res.json(sections);
           break;
